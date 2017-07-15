@@ -13,6 +13,12 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
     }
 
+    open var padding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 18, bottom: 10, right: 33) {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
+
     open var titleFont: UIFont = UIFont.systemFont(ofSize: 12) {
         didSet {
             self.tableView.reloadData()
@@ -38,18 +44,6 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
 
     open var highlightTextColor: UIColor = UIColor(red:0.95, green:0.75, blue:0.25, alpha:1.00) {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
-
-    open var paddingLeft: CGFloat = 18 {
-        didSet {
-            self.tableView.reloadData()
-        }
-    }
-
-    open var paddingRight: CGFloat = 33 {
         didSet {
             self.tableView.reloadData()
         }
@@ -144,9 +138,14 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
             cell.dateTimeLabel.text = dataSource.timeLineView(self, dateTime: indexPath)
             cell.dateTimeLabel.font = self.dateTimeFont
             cell.dateTimeLabel.textColor = textColor
-            cell.updateContentViewConstraints(UIEdgeInsets.init(top: 0, left: paddingLeft, bottom: 0, right: paddingRight),
-                                              lineWidth: lineWidth,
-                                              circleRadius: self.circleRadius)
+
+            var padding: UIEdgeInsets
+            if indexPath.row == 0 {
+                padding = UIEdgeInsets(top: self.padding.top, left: self.padding.left, bottom: 0, right: self.padding.right)
+            } else {
+                padding = UIEdgeInsets(top: 0, left: self.padding.left, bottom: 0, right: self.padding.right)
+            }
+            cell.updateContentViewConstraints(padding,lineWidth: lineWidth, circleRadius: self.circleRadius)
         }
         return cell
     }
@@ -157,12 +156,15 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
 
         if let dataSource = self.dataSource {
-            let maxWidth = width - self.paddingLeft - self.paddingRight - (self.circleRadius * 2) - 25
+            let maxWidth = width - self.padding.left - self.padding.right - (self.circleRadius * 2) - 25
             let titleHight = dataSource.timeLineView(self, title: indexPath).height(self.titleFont, maxWidth: maxWidth)
             let contentHight = dataSource.timeLineView(self, content: indexPath).height(self.contentFont, maxWidth: maxWidth)
             let dateTimeHight = dataSource.timeLineView(self, dateTime: indexPath).height(self.dateTimeFont, maxWidth: maxWidth)
+            if indexPath.row == 0 {
+                return self.padding.top + titleHight + 2 + contentHight + 10 + dateTimeHight + 20
+            }
             if indexPath.row == dataSource.numberOfTimeLineRecordCount(self) - 1 {
-                return titleHight + 2 + contentHight + 10 + dateTimeHight
+                return titleHight + 2 + contentHight + 10 + dateTimeHight + self.padding.bottom
             }
             return titleHight + 2 + contentHight + 10 + dateTimeHight + 20
         }

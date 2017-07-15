@@ -35,7 +35,7 @@ import SnapKit
     func updateContentViewConstraints(_ padding: UIEdgeInsets, lineWidth: CGFloat, circleRadius: CGFloat) {
         self.circleView.layer.cornerRadius = circleRadius
         self.circleView.snp.updateConstraints { (make) in
-            make.top.equalTo(self.contentView)
+            make.top.equalTo(self.contentView).offset(padding.top)
             make.left.equalTo(self.contentView).offset(padding.left)
             make.size.equalTo(circleRadius * 2)
         }
@@ -50,7 +50,7 @@ import SnapKit
         self.titleLabel.snp.updateConstraints { (make) in
             make.left.equalTo(self.contentView).offset(contentOffsetX)
             make.right.equalTo(self.contentView).offset(-padding.right)
-            make.top.equalTo(self.contentView)
+            make.top.equalTo(self.contentView).offset(padding.top)
             make.height.equalTo(self.titleLabel.text!.height(self.titleLabel.font, maxWidth: maxWidth))
         }
         self.contentLabel.snp.updateConstraints { (make) in

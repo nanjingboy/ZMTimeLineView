@@ -2,6 +2,5 @@ platform :ios, '9.0'
 
 target 'Example' do
   use_frameworks!
-  pod 'SnapKit', '~> 3.2.0'
   pod 'ZMTimeLineView', :path => '../'
 end

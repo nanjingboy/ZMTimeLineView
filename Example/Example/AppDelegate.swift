@@ -4,12 +4,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var viewController: UIViewController?
+    var navigationController: UINavigationController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.viewController = ViewController()
-        self.window!.rootViewController = self.viewController
+        self.navigationController = UINavigationController()
+        self.navigationController!.pushViewController(ViewController(), animated: false)
+        self.window!.rootViewController = self.navigationController
         self.window!.makeKeyAndVisible()
         return true
     }

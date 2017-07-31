@@ -1,3 +1,6 @@
+## 0.1.3 2017-07-31
+* Add TimeLineView#reloadData method
+
 ## 0.1.1 2017-07-24
 * Update TimeLineView style when it has only one record
 

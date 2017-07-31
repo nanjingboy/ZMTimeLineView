@@ -10,7 +10,7 @@ A simple Time Line View library by Swift
 #### Install with [CocoaPods](http://cocoapods.org/)
 
 ```ruby
-pod 'ZMTimeLineView', '~> 0.1.5'
+pod 'ZMTimeLineView', '~> 0.2.0'
 ```
 
 #### [Example](Example/Example/ViewController.swift)

@@ -1,3 +1,6 @@
+## 0.2.0 2017-07-31
+* Rewrite TimeLineView with UIStackView
+
 ## 0.1.5 2017-07-31
 * Fix timeline record height error when it has only one record
 

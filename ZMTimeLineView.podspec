@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ZMTimeLineView'
-  s.version          = '0.2.0'
+  s.version          = '0.2.1'
   s.summary          = 'A simple Time Line View library by Swift'
   s.homepage         = 'https://github.com/nanjingboy/ZMTimeLineView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }

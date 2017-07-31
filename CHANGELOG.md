@@ -1,3 +1,6 @@
+## 0.2.1 2017-07-31
+* Add configuration to set timeline record background color
+
 ## 0.2.0 2017-07-31
 * Rewrite TimeLineView with UIStackView
 

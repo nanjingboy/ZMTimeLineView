@@ -160,11 +160,15 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
             let titleHight = dataSource.timeLineView(self, title: indexPath).height(self.titleFont, maxWidth: maxWidth)
             let contentHight = dataSource.timeLineView(self, content: indexPath).height(self.contentFont, maxWidth: maxWidth)
             let dateTimeHight = dataSource.timeLineView(self, dateTime: indexPath).height(self.dateTimeFont, maxWidth: maxWidth)
-            if indexPath.row == dataSource.numberOfTimeLineRecordCount(self) - 1 {
-                return titleHight + 2 + contentHight + 10 + dateTimeHight + self.padding.bottom
+            let count = dataSource.numberOfTimeLineRecordCount(self)
+            if count == 1 {
+                return self.padding.top + titleHight + 2 + contentHight + 10 + dateTimeHight + self.padding.bottom
             }
             if indexPath.row == 0 {
                 return self.padding.top + titleHight + 2 + contentHight + 10 + dateTimeHight + 20
+            }
+            if indexPath.row == count - 1 {
+                return titleHight + 2 + contentHight + 10 + dateTimeHight + self.padding.bottom
             }
             return titleHight + 2 + contentHight + 10 + dateTimeHight + 20
         }

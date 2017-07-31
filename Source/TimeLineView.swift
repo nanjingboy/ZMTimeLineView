@@ -171,6 +171,10 @@ open class TimeLineView: UIView, UITableViewDataSource, UITableViewDelegate {
         return 0
     }
 
+    open func reloadData() {
+        self.tableView.reloadData()
+    }
+
     fileprivate func addTableView() {
         self.backgroundColor = UIColor.white
         self.tableView.dataSource = self

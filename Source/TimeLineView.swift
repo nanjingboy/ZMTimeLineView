@@ -19,6 +19,8 @@ open class TimeLineView: UIStackView {
     open var highlightCircleBorderWidth: CGFloat = 1
     open var highlightCircleBorderColor: UIColor = UIColor(red:0.97, green:0.88, blue:0.65, alpha:1.00)
 
+    open var timeLineRecordBackgroundColor: UIColor = UIColor.white
+
     open func reloadData() {
         self.axis = .vertical
         for subView in self.arrangedSubviews {
@@ -61,6 +63,7 @@ open class TimeLineView: UIStackView {
 
     func timeLineView(_ timeLineView: TimeLineView, cellForRowAt index: Int) -> TimeLineViewCell {
         let cell = TimeLineViewCell()
+        cell.backgroundColor = self.timeLineRecordBackgroundColor
         if let dataSource = self.dataSource {
             var textColor: UIColor
             let count = dataSource.numberOfTimeLineRecordCount(timeLineView)

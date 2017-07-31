@@ -23,8 +23,8 @@ open class TimeLineView: UIStackView {
 
     open func reloadData() {
         self.axis = .vertical
-        for subView in self.arrangedSubviews {
-            self.removeArrangedSubview(subView)
+        for subView in self.subviews {
+            subView.removeFromSuperview()
         }
         if let dataSource = self.dataSource {
             let count = dataSource.numberOfTimeLineRecordCount(self)

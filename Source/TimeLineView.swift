@@ -66,19 +66,11 @@ open class TimeLineView: UIStackView {
         cell.backgroundColor = self.timeLineRecordBackgroundColor
         if let dataSource = self.dataSource {
             var textColor: UIColor
-            let count = dataSource.numberOfTimeLineRecordCount(timeLineView)
             let isHighlight = dataSource.timeLineView(timeLineView, isHighlight: index)
             if isHighlight {
                 textColor = self.highlightTextColor
             } else {
                 textColor = self.textColor
-            }
-
-            var lineWidth: CGFloat
-            if index > 0 && index == count - 1 {
-                lineWidth = 0
-            } else {
-                lineWidth = self.lineWidth
             }
 
             cell.circleView.backgroundColor = textColor
@@ -123,7 +115,7 @@ open class TimeLineView: UIStackView {
                 circleRadius = self.circleRadius
             }
             cell.updateContentViewConstraints(padding,
-                                              lineWidth: lineWidth,
+                                              lineWidth: self.lineWidth,
                                               circleRadius: circleRadius,
                                               width: dataSource.timeLineView(timeLineView, widthForRowAt: index))
         }

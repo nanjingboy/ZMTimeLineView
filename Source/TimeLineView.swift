@@ -16,7 +16,7 @@ open class TimeLineView: UIStackView {
 
     open var lineWidth: CGFloat = 1
     open var circleRadius: CGFloat = 4
-    open var highlightCircleBorderWidth: CGFloat = 1
+    open var highlightCircleBorderWidth: CGFloat = 2
     open var highlightCircleBorderColor: UIColor = UIColor(red:0.97, green:0.88, blue:0.65, alpha:1.00)
 
     open var timeLineRecordBackgroundColor: UIColor = UIColor.white
@@ -73,6 +73,7 @@ open class TimeLineView: UIStackView {
             } else {
                 textColor = self.textColor
             }
+
             var lineWidth: CGFloat
             if index > 0 && index == count - 1 {
                 lineWidth = 0
@@ -102,16 +103,28 @@ open class TimeLineView: UIStackView {
             cell.dateTimeLabel.textColor = textColor
 
             var padding: UIEdgeInsets
-            if count == 1 {
-                padding = UIEdgeInsets(top: self.padding.top, left: self.padding.left, bottom: self.padding.bottom, right: self.padding.right)
-            } else if index == 0 {
-                padding = UIEdgeInsets(top: self.padding.top, left: self.padding.left, bottom: 0, right: self.padding.right)
+            var paddingLeft: CGFloat
+            if isHighlight {
+                paddingLeft = self.padding.left
             } else {
-                padding = UIEdgeInsets(top: 0, left: self.padding.left, bottom: 0, right: self.padding.right)
+                paddingLeft = self.padding.left + self.highlightCircleBorderWidth
+            }
+
+            if index == 0 {
+                padding = UIEdgeInsets(top: self.padding.top, left: paddingLeft, bottom: 0, right: self.padding.right)
+            } else {
+                padding = UIEdgeInsets(top: 0, left: paddingLeft, bottom: 0, right: self.padding.right)
+            }
+
+            var circleRadius: CGFloat
+            if isHighlight {
+                circleRadius = self.circleRadius + self.highlightCircleBorderWidth
+            } else {
+                circleRadius = self.circleRadius
             }
             cell.updateContentViewConstraints(padding,
                                               lineWidth: lineWidth,
-                                              circleRadius: self.circleRadius,
+                                              circleRadius: circleRadius,
                                               width: dataSource.timeLineView(timeLineView, widthForRowAt: index))
         }
         return cell

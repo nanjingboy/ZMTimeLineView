@@ -1,3 +1,7 @@
+## 0.2.3 2017-08-10
+* Make highlight circle bigger then others
+* Show line at all time
+
 ## 0.2.1 2017-07-31
 * Add configuration to set timeline record background color
 

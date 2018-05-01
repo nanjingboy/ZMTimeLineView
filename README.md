@@ -10,24 +10,23 @@ A simple Time Line View library by Swift
 #### Install with [CocoaPods](http://cocoapods.org/)
 
 ```ruby
-pod 'ZMTimeLineView', '~> 0.2.3'
+pod 'ZMTimeLineView', '~> 0.3.0'
 ```
 
 #### [Example](Example/Example/ViewController.swift)
 
 # Configuration
 
+* `bgColor`
 * `padding`
-* `titleFont`
-* `contentFont`
-* `dateTimeFont`
-* `textColor`
-* `highlightTextColor`
+* `recordBottomHeight`
 * `lineWidth`
+* `lineColor`
 * `circleRadius`
+* `circleColor`
 * `highlightCircleBorderWidth`
 * `highlightCircleBorderColor`
-* `timeLineRecordBackgroundColor`
+* `highlightCircleColor`
 
 # License
 

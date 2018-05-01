@@ -1,3 +1,6 @@
+## 0.3.0 2018-05-01
+* Can use custom view in each record content panel
+
 ## 0.2.3 2017-08-10
 * Make highlight circle bigger then others
 * Show line at all time

@@ -28,29 +28,31 @@ class ViewController: UIViewController, TimeLineViewDataSource {
     }
 
     func numberOfTimeLineRecordCount(_ timeLineView: TimeLineView) -> Int {
-        return 10
-    }
-
-    func timeLineView(_ timeLineView: TimeLineView, widthForRowAt index: Int) -> CGFloat {
-        return UIScreen.main.bounds.width
-    }
-
-    func timeLineView(_ timeLineView: TimeLineView, title index: Int) -> String {
-        return "Test Title"
-    }
-
-    func timeLineView(_ timeLineView: TimeLineView, content index: Int) -> String {
-        if index % 2 == 0 {
-            return "Test Content"
-        }
-        return "Test Content1,Test Content2,Test Content3,Test Content4,Test Content5,Test Content6"
-    }
-
-    func timeLineView(_ timeLineView: TimeLineView, dateTime index: Int) -> String {
-        return "2016-12-12 12:12"
+        return 20
     }
 
     func timeLineView(_ timeLineView: TimeLineView, isHighlight index: Int) -> Bool {
         return index == 0
+    }
+    
+    func timeLineView(_ timeLineView: TimeLineView, contentViewHeight index: Int) -> CGFloat {
+        return 46
+    }
+    
+    func timeLineView(_ timeLineView: TimeLineView, contentView index: Int) -> UIView {
+        let view = TimeLineContentView()
+        view.titleLabel.text = "Test Title"
+        view.contentLabel.text = "Test Content"
+        view.dateTimeLabel.text = "2018-05-01 18:02"
+        if index == 0 {
+            view.titleLabel.textColor = TimeLineColors.highlightColor
+            view.contentLabel.textColor = TimeLineColors.highlightColor
+            view.dateTimeLabel.textColor = TimeLineColors.highlightColor
+        } else {
+            view.titleLabel.textColor = TimeLineColors.defaultColor
+            view.contentLabel.textColor = TimeLineColors.defaultColor
+            view.dateTimeLabel.textColor = TimeLineColors.defaultColor
+        }
+        return view
     }
 }

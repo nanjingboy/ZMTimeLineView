@@ -1,12 +1,10 @@
 import Foundation
 
-public protocol TimeLineViewDataSource {
-
+public protocol TimeLineViewDataSource: class {
+    
     func numberOfTimeLineRecordCount(_ timeLineView: TimeLineView) -> Int
 
-    func timeLineView(_ timeLineView: TimeLineView, widthForRowAt index: Int) -> CGFloat
-    func timeLineView(_ timeLineView: TimeLineView, title index: Int) -> String
-    func timeLineView(_ timeLineView: TimeLineView, content index: Int) -> String
-    func timeLineView(_ timeLineView: TimeLineView, dateTime index: Int) -> String
     func timeLineView(_ timeLineView: TimeLineView, isHighlight index: Int) -> Bool
+    func timeLineView(_ timeLineView: TimeLineView, contentViewHeight index: Int) -> CGFloat
+    func timeLineView(_ timeLineView: TimeLineView, contentView index: Int) -> UIView
 }

@@ -50,7 +50,7 @@ open class TimeLineView: UIStackView {
                 var cellHeight: CGFloat
                 var circleViewTopOffset: CGFloat
                 var circleViewBottomOffset: CGFloat
-                let contentViewHeight = dataSource.timeLineView(self, contentViewHeight: index)
+                let contentViewHeight = dataSource.timeLineView(self, contentViewHeight: contentView, index: index)
                 if index == 0 {
                     circleViewTopOffset = self.padding.top
                     circleViewBottomOffset = 0

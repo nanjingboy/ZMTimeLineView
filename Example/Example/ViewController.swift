@@ -34,8 +34,8 @@ class ViewController: UIViewController, TimeLineViewDataSource {
     func timeLineView(_ timeLineView: TimeLineView, isHighlight index: Int) -> Bool {
         return index == 0
     }
-    
-    func timeLineView(_ timeLineView: TimeLineView, contentViewHeight index: Int) -> CGFloat {
+
+    func timeLineView(_ timeLineView: TimeLineView, contentViewHeight contentView: UIView, index: Int) -> CGFloat {
         return 46
     }
     

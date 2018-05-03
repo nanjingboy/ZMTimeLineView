@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-open class TimeLineView: UIStackView {
+open class TimeLineView: UIView {
     
     open weak var dataSource: TimeLineViewDataSource?
 
@@ -19,16 +19,16 @@ open class TimeLineView: UIStackView {
     open var highlightCircleColor: UIColor = TimeLineColors.highlightColor
 
     open func reloadData() {
-        self.axis = .vertical
-        for arrangedSubview in self.arrangedSubviews {
-            self.removeArrangedSubview(arrangedSubview)
+        for subView in self.subviews {
+            subView.removeFromSuperview()
         }
+        var totalHeight: CGFloat = 0
         if let dataSource = self.dataSource {
             let count = dataSource.numberOfTimeLineRecordCount(self)
             for index in 0..<count {
                 let cell = UIView()
                 cell.backgroundColor = self.bgColor
-                self.addArrangedSubview(cell)
+                self.addSubview(cell)
 
                 let circleView = TimeLineRecordCircleView()
                 circleView.backgroundColor = self.bgColor
@@ -65,8 +65,11 @@ open class TimeLineView: UIStackView {
                     cellHeight = contentViewHeight + self.recordBottomHeight
                 }
                 cell.snp.makeConstraints { (make) in
+                    make.left.right.equalTo(self)
+                    make.top.equalTo(self).offset(totalHeight)
                     make.height.equalTo(cellHeight)
                 }
+                totalHeight += cellHeight
                 circleView.snp.makeConstraints { (make) in
                     make.left.equalTo(cell).offset(self.padding.left)
                     make.width.equalTo((self.circleRadius + self.highlightCircleBorderWidth) * 2)
@@ -81,5 +84,6 @@ open class TimeLineView: UIStackView {
                 }
             }
         }
+        self.heightAnchor.constraint(equalToConstant: totalHeight).isActive = true
     }
 }

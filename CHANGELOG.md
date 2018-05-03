@@ -1,3 +1,6 @@
+## 0.3.1 2018-05-03
+* Rewrite TimeLineView with UIView to solve nested UIStackView constraint problem
+
 ## 0.3.0 2018-05-01
 * Can use custom view in each record content panel
 

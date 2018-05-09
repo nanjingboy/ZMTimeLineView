@@ -2,13 +2,15 @@ import UIKit
 import SnapKit
 
 open class TimeLineView: UIView {
-    
+
     open weak var dataSource: TimeLineViewDataSource?
 
     open var bgColor: UIColor = UIColor.white
-    open var padding: UIEdgeInsets = UIEdgeInsets(top: 10, left: 16, bottom: 0, right: 16)
+    open var topPadding: CGFloat = 10
+    open var leftPadding: CGFloat = 16
+    open var rightPadding: CGFloat = 16
     open var recordBottomHeight: CGFloat = 20
-    
+
     open var lineWidth: CGFloat = 1
     open var lineColor: UIColor = TimeLineColors.defaultColor
 
@@ -18,7 +20,7 @@ open class TimeLineView: UIView {
     open var highlightCircleBorderColor: UIColor = TimeLineColors.highlightBorderColor
     open var highlightCircleColor: UIColor = TimeLineColors.highlightColor
 
-    open func reloadData() {
+    open func reloadData(_ updateConstraintCallback: (CGFloat) -> Void) {
         for subView in self.subviews {
             subView.removeFromSuperview()
         }
@@ -47,23 +49,8 @@ open class TimeLineView: UIView {
                 let contentView = dataSource.timeLineView(self, contentView: index)
                 cell.addSubview(contentView)
 
-                var cellHeight: CGFloat
-                var circleViewTopOffset: CGFloat
-                var circleViewBottomOffset: CGFloat
                 let contentViewHeight = dataSource.timeLineView(self, contentViewHeight: contentView, index: index)
-                if index == 0 {
-                    circleViewTopOffset = self.padding.top
-                    circleViewBottomOffset = 0
-                    cellHeight = self.padding.top + contentViewHeight + self.recordBottomHeight
-                } else if index == count - 1 {
-                    circleViewTopOffset = 0
-                    circleViewBottomOffset = self.padding.bottom
-                    cellHeight = self.padding.bottom + contentViewHeight + self.recordBottomHeight
-                } else {
-                    circleViewTopOffset = 0
-                    circleViewBottomOffset = 0
-                    cellHeight = contentViewHeight + self.recordBottomHeight
-                }
+                let cellHeight = contentViewHeight + self.recordBottomHeight
                 cell.snp.makeConstraints { (make) in
                     make.left.right.equalTo(self)
                     make.top.equalTo(self).offset(totalHeight)
@@ -71,19 +58,19 @@ open class TimeLineView: UIView {
                 }
                 totalHeight += cellHeight
                 circleView.snp.makeConstraints { (make) in
-                    make.left.equalTo(cell).offset(self.padding.left)
+                    make.left.equalTo(cell).offset(self.leftPadding)
                     make.width.equalTo((self.circleRadius + self.highlightCircleBorderWidth) * 2)
-                    make.top.equalTo(cell).offset(circleViewTopOffset)
-                    make.bottom.equalTo(cell).offset(-circleViewBottomOffset)
+                    make.top.equalTo(cell).offset(index == 0 ? self.topPadding : 0)
+                    make.bottom.equalTo(cell)
                 }
                 contentView.snp.makeConstraints { (make) in
                     make.left.equalTo(circleView.snp.right)
-                    make.right.equalTo(cell).offset(-self.padding.right)
+                    make.right.equalTo(cell).offset(-self.rightPadding)
                     make.top.equalTo(circleView)
                     make.height.equalTo(contentViewHeight)
                 }
             }
         }
-        self.heightAnchor.constraint(equalToConstant: totalHeight).isActive = true
+        updateConstraintCallback(totalHeight)
     }
 }

@@ -24,7 +24,13 @@ class ViewController: UIViewController, TimeLineViewDataSource {
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        timeLineView.reloadData()
+        timeLineView.reloadData { (height) in
+            timeLineView.snp.remakeConstraints({ (make) in
+                make.edges.equalTo(scrollView)
+                make.width.equalTo(scrollView)
+                make.height.equalTo(height)
+            })
+        }
     }
 
     func numberOfTimeLineRecordCount(_ timeLineView: TimeLineView) -> Int {

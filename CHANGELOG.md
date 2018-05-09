@@ -1,3 +1,8 @@
+## 0.5.0 2018-05-09
+
+* Add callback arg to remake constraints of TimeLine
+* Replace padding configuration with leftPadding, rightPadding, topPadding
+
 ## 0.3.1 2018-05-03
 * Rewrite TimeLineView with UIView to solve nested UIStackView constraint problem
 
